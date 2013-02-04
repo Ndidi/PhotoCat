@@ -1,19 +1,20 @@
 //Application Window Component Constructor
 function ApplicationWindow() {
-	//load component dependencies
-	var FirstView = require('ui/common/FirstView');
-		
-	//create component instance
-	var self = Ti.UI.createWindow({
-		backgroundColor:'#ffffff',
-		navBarHidden:true,
-		exitOnClose:true
-	});
-		
-	//construct UI
-	var firstView = new FirstView();
-	self.add(firstView);
+	var self = Titanium.UI.createWindow();
 	
+	var HomeWindow = require('ui/common/HomeWindow'),
+		CategoryListWindow = require('ui/common/CategoryListWindow'),
+		GalleryWindow = require('ui/common/GalleryWindow'),
+		ImageDetailWindow = require('ui/common/ImageDetailWindow'); 
+	
+	var homeWindow = new HomeWindow();
+	
+	var nav = Titanium.UI.iPhone.createNavigationGroup({
+		window: homeWindow
+	});
+
+	self.add(nav);
+
 	return self;
 }
 
