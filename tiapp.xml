@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">5niFbpYCFIPgcGXT13iHhhYONeUw1sot</property>
+    <property name="acs-oauth-key-production" type="string">ZPRA8qJAOHW4EsTkthz7QxQUQCiCT3Q1</property>
+    <property name="acs-api-key-production" type="string">JjEr5M5BtumD6Yl4kVnBgNXGPeDNUhKq</property>
+    <property name="acs-oauth-secret-development" type="string">dtma1nW7OJ4nh55FXWSNOYeT9cleeRNL</property>
+    <property name="acs-oauth-key-development" type="string">nhHkMMll7u4yazFLXsEEY3RjYoziViWg</property>
+    <property name="acs-api-key-development" type="string">DbbkYBnaS3bMiargTc7oIgHq3n2aWvRs</property>
+    <id>com.didistu.photocat</id>
+    <name>PhotoCat</name>
+    <version>1.0</version>
+    <publisher>ndidi</publisher>
+    <url>http://www.didistu.com</url>
+    <description>not specified</description>
+    <copyright>2013 by ndidi</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>f870a1f9-7ee6-437f-91cf-992bd5ec0944</guid>
+    <property name="ti.ui.defaultunit" type="string">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs">ti.cloud</module>
+    </modules>
+    <deployment-targets>
+        <target device="blackberry">false</target>
+        <target device="android">false</target>
+        <target device="ipad">true</target>
+        <target device="iphone">true</target>
+        <target device="mobileweb">true</target>
+    </deployment-targets>
+    <sdk-version>3.0.0.GA</sdk-version>
+</ti:app>
