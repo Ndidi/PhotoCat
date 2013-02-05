@@ -1,8 +1,4 @@
-function GalleryWindow(categoryId) {
-	var self = Ti.UI.createWindow({
-		backgroundColor:'blue'
-	});
-	
+function GalleryWindow(categoryId, categoryName) {
 	var db = require('db');
 	
 	Titanium.include('thirdparty/titanium-picture-gallery/picturegallery.js');
@@ -15,12 +11,14 @@ function GalleryWindow(categoryId) {
 	};
 	
 	var pictureGallery = PictureGallery.createWindow({
- 		images: galleryImages
+ 		images: galleryImages,
+ 		title: categoryName,
+ 		windowGroup:Ti.App.nav
 	});
 	
-	pictureGallery.open();
+	Ti.App.nav.open(pictureGallery);
 	
-	return self;
+	return pictureGallery;
 }
 
 module.exports = GalleryWindow;

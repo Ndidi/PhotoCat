@@ -22,8 +22,8 @@ function CategoryListWindow(){
 	
 	tableView.addEventListener('click', function(e){
 		var GalleryWindow = require('ui/common/GalleryWindow');
-		Ti.App.nav.open(new GalleryWindow(e.index));
-		//index is the index of the clicked row. as we are not allowing table rows to be moved, this is fine.
+		Ti.App.nav.open(new GalleryWindow(e.index, categories[e.index].name));
+		//index is the index of the clicked row. As we are not allowing table rows to be moved, this is fine.
 	});
 	
 	self.add(tableView);
