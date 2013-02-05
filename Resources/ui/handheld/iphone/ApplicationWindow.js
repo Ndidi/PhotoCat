@@ -14,7 +14,9 @@ function ApplicationWindow() {
 	});
 
 	self.add(nav);
-
+	
+	Ti.App.nav = nav;
+	
 	return self;
 }
 

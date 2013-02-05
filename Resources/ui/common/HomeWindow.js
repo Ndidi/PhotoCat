@@ -22,34 +22,56 @@ function HomeWindow() {
 	self.add(addPhoto);
 	self.add(viewCategories);
 	
-	//Add behavior for UI
-	addPhoto.addEventListener('click', function(){
-		var modalWindow = Ti.UI.createWindow({
-			backgroundColor:'purple'
-		});
-		
-		var choosebtn = Ti.UI.createButton({
-			title:'Choose from gallery',
-			width:100,
-			height:30
-		});
-		
-		var takePhotoBtn = Ti.UI.createButton({
-			title:'Take a photo',
-			width:100,
-			height:30
-		});
-		
-		var cancelBtn = Ti.UI.createButton({
-			title:'Cancel',
-			width:100,
-			height:30
-		});
-		
+	//Dialog
+	var dialog = Ti.UI.createOptionDialog({
+	  cancel: 2,
+	  options: ['Choose from gallery', 'Take a photo', 'Cancel'],
+	  destructive: 2
 	});
-	// label.addEventListener('click', function(e) {
-		// alert(e.source.text);
-	// });
+	
+	dialog.addEventListener('click', function(e){
+		if(e.index === 0){
+			//Gallery app
+		}
+		else if(e.index === 1){
+			//Camera
+			Titanium.Media.showCamera({
+				mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO],
+				success:function(cameraMediaItemType){
+					var SaveImageToCategoryWindow = require('ui/common/SaveImageToCategoryWindow');
+					Ti.App.nav.open(new SaveImageToCategoryWindow(cameraMediaItemType));
+				},
+				cancel:function(){},
+				error:function(error){
+					// create alert
+					var a = Titanium.UI.createAlertDialog({title:'Camera'});
+			
+					// set message
+					if (error.code == Titanium.Media.NO_CAMERA)
+					{
+						a.setMessage('Please run this test on a device');
+					}
+					else
+					{
+						a.setMessage('Unexpected error: ' + error.code);
+					}
+			
+					// show alert
+					a.show();
+				}
+			});
+	
+			}
+	});
+	
+	addPhoto.addEventListener('click', function(e){
+	  dialog.show();
+	});
+	
+	viewCategories.addEventListener('click', function(e){
+		var CategoryListWindow = require('ui/common/CategoryListWindow');
+		Ti.App.nav.open(new CategoryListWindow());
+	});
 	
 	return self;
 }

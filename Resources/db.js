@@ -13,7 +13,7 @@ exports.addCategory = function(_name){
 	db.close();
 }
 
-exports.getCategories = function(){
+exports.getAllCategories = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
 	var retData = []; 
 	var rows = db.execute('SELECT * from categories');
