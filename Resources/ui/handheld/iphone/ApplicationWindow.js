@@ -2,10 +2,7 @@
 function ApplicationWindow() {
 	var self = Titanium.UI.createWindow();
 	
-	var HomeWindow = require('ui/common/HomeWindow'),
-		CategoryListWindow = require('ui/common/CategoryListWindow'),
-		GalleryWindow = require('ui/common/GalleryWindow'),
-		ImageDetailWindow = require('ui/common/ImageDetailWindow'); 
+	var HomeWindow = require('ui/common/HomeWindow'); 
 	
 	var homeWindow = new HomeWindow();
 	

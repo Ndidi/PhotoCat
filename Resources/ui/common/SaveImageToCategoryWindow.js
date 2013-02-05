@@ -1,7 +1,8 @@
 function SaveImageToCategoryWindow(image){
 	var self = Ti.UI.createWindow({
 		backgroundColor:'white',
-		title:'Categories'
+		title:'Categories',
+		navBarHidden:false
 	});
 	var db = require('db');
 	
@@ -33,11 +34,20 @@ function SaveImageToCategoryWindow(image){
 	  data[i] = Ti.UI.createTableViewRow({title:categories[i].name}) 
 	};
 	
-	var tableview = Titanium.UI.createTableView({
+	var tableView = Titanium.UI.createTableView({
 		data:data
 	});
 	
-	self.add(tableview);
+	tableView.addEventListener('click', function(e){
+		//index is the index of the clicked row. as we are not allowing table rows to be moved, this is fine.
+		db.saveImageToCategory(image, e.index);
+		
+		//TODO Need to be detailWindow 
+		// var GalleryWindow = require('ui/common/GalleryWindow');
+		// Ti.App.nav.open(new GalleryWindow(e.index));
+	});
+	
+	self.add(tableView);
 	return self;
 }
 

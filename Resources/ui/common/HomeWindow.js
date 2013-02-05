@@ -1,5 +1,6 @@
 function HomeWindow() {
 	var self = Ti.UI.createWindow({
+		navBarHidden:true,
 		backgroundColor:'white'
 	});
 	
@@ -35,7 +36,7 @@ function HomeWindow() {
 			mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO],
 			success:function(cameraMediaItemType){
 				var SaveImageToCategoryWindow = require('ui/common/SaveImageToCategoryWindow');
-				Ti.App.nav.open(new SaveImageToCategoryWindow(cameraMediaItemType));
+				Ti.App.nav.open(new SaveImageToCategoryWindow(cameraMediaItemType.media));
 			},
 			cancel:function(){},
 			error:function(error){
