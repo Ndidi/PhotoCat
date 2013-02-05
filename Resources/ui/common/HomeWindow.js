@@ -30,38 +30,34 @@ function HomeWindow() {
 	});
 	
 	dialog.addEventListener('click', function(e){
+			//imageOptionsType is doubles up for PhotoGalleryOptionsType and CameraOptionsType
+		var imageOptionsType = {
+			mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO],
+			success:function(cameraMediaItemType){
+				var SaveImageToCategoryWindow = require('ui/common/SaveImageToCategoryWindow');
+				Ti.App.nav.open(new SaveImageToCategoryWindow(cameraMediaItemType));
+			},
+			cancel:function(){},
+			error:function(error){
+				var alert = Titanium.UI.createAlertDialog({title:'Camera'});
+				if (error.code == Titanium.Media.NO_CAMERA){
+					alert.setMessage('Please run this test on a device');
+				}
+				else{
+					alert.setMessage('Unexpected error: ' + error.code);
+				}
+				alert.show();
+			}
+		};
+		
 		if(e.index === 0){
-			//Gallery app
+			//Gallery
+			Ti.Media.openPhotoGallery(imageOptionsType);
 		}
 		else if(e.index === 1){
 			//Camera
-			Titanium.Media.showCamera({
-				mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO],
-				success:function(cameraMediaItemType){
-					var SaveImageToCategoryWindow = require('ui/common/SaveImageToCategoryWindow');
-					Ti.App.nav.open(new SaveImageToCategoryWindow(cameraMediaItemType));
-				},
-				cancel:function(){},
-				error:function(error){
-					// create alert
-					var a = Titanium.UI.createAlertDialog({title:'Camera'});
-			
-					// set message
-					if (error.code == Titanium.Media.NO_CAMERA)
-					{
-						a.setMessage('Please run this test on a device');
-					}
-					else
-					{
-						a.setMessage('Unexpected error: ' + error.code);
-					}
-			
-					// show alert
-					a.show();
-				}
-			});
-	
-			}
+			Titanium.Media.showCamera(imageOptionsType);
+		}
 	});
 	
 	addPhoto.addEventListener('click', function(e){

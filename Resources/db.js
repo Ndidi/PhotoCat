@@ -4,6 +4,7 @@ exports.createDb = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
 	db.execute('CREATE TABLE IF NOT EXISTS categories(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
 	db.execute('CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY, base64image TEXT, category INTEGER, FOREIGN KEY(category) REFERENCES categories(id))');
+	db.execute('INSERT OR IGNORE INTO categories (id, name) VALUES (1, "Home"), (2, "Work"), (3, "Holiday")');
 	db.close();
 }
 
