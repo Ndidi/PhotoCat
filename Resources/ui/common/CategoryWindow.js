@@ -30,7 +30,11 @@ function CategoryWindow(image, mode){
 					db.addCategory(e.text);
 					var catId = db.getIdForCategoryName(e.text);
 					SaveAndSwitchToViewMode(catId);
+					
+					//Add new row to tableView and categories
 					tableView.appendRow(Ti.UI.createTableViewRow({title:e.text}));
+					categories.push({id:catId, name:e.text});
+					//Open the gallery
 					Ti.App.nav.open(new GalleryWindow(catId, e.text));
 				}
 			});

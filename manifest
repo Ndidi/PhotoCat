@@ -1,9 +1,9 @@
-#appname: PhotoCat
-#appid: com.didistu.photocat
-#type: mobile
-#guid: f870a1f9-7ee6-437f-91cf-992bd5ec0944
-#version: 1.0
-#publisher: not specified
-#url: not specified
-#image: appicon.png
-#desc: not specified
+#appname:PhotoCat
+#appid:com.didistu.photocat
+#type:mobile
+#guid:f870a1f9-7ee6-437f-91cf-992bd5ec0944
+#version:1.0
+#publisher:ndidi
+#url:http://www.didistu.com
+#image:appicon.png
+#desc:not specified

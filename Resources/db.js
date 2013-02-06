@@ -4,7 +4,7 @@ exports.createDb = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
 	db.execute('CREATE TABLE IF NOT EXISTS categories(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
 	db.execute('CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY, image BLOB, category INTEGER, FOREIGN KEY(category) REFERENCES categories(id))');
-	db.execute('INSERT OR IGNORE INTO categories SELECT 1 AS id, "Home" AS name UNION SELECT 2, "Work" UNION SELECT 3, "Holiday"');
+	db.execute('INSERT OR IGNORE INTO categories SELECT 0 AS id, "Home" AS name UNION SELECT 1, "Work" UNION SELECT 2, "Holiday"');
 	db.close();
 }
 
@@ -28,12 +28,12 @@ exports.getIdForCategoryName = function(_name){
 
 exports.getAllCategories = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
-	var retData = []; 
+	var retData = [];
 	var rows = db.execute('SELECT * FROM categories');
 	while(rows.isValidRow()){
 		retData.push({id:rows.fieldByName('id'), name:rows.fieldByName('name')});
 		rows.next();
-	}
+	}	
 	db.close();
 	return retData;
 }
