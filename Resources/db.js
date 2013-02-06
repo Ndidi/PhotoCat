@@ -14,6 +14,18 @@ exports.addCategory = function(_name){
 	db.close();
 }
 
+exports.getIdForCategoryName = function(_name){
+	var db = Ti.Database.open(DATABASE_NAME);
+	var rows = db.execute('SELECT id FROM categories WHERE name == ?', _name);
+	var id;
+	while(rows.isValidRow()){
+		id = rows.fieldByName('id');
+		rows.next();
+	}
+	db.close();
+	return id;
+}
+
 exports.getAllCategories = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
 	var retData = []; 

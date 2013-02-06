@@ -4,6 +4,8 @@ function HomeWindow() {
 		backgroundColor:'white'
 	});
 	
+	var CategoryWindow = require('ui/common/CategoryWindow');
+	
 	//Create buttons
 	var addPhoto = Titanium.UI.createButton({
 		title:'Add Photo',
@@ -35,8 +37,7 @@ function HomeWindow() {
 		var imageOptionsType = {
 			mediaTypes:[Ti.Media.MEDIA_TYPE_PHOTO],
 			success:function(cameraMediaItemType){
-				var SaveImageToCategoryWindow = require('ui/common/SaveImageToCategoryWindow');
-				Ti.App.nav.open(new SaveImageToCategoryWindow(cameraMediaItemType.media));
+				Ti.App.nav.open(new CategoryWindow(cameraMediaItemType.media, "SAVE"));
 			},
 			cancel:function(){},
 			error:function(error){
@@ -66,8 +67,7 @@ function HomeWindow() {
 	});
 	
 	viewCategories.addEventListener('click', function(e){
-		var CategoryListWindow = require('ui/common/CategoryListWindow');
-		Ti.App.nav.open(new CategoryListWindow());
+		Ti.App.nav.open(new CategoryWindow(null, "VIEW"));
 	});
 	
 	return self;
