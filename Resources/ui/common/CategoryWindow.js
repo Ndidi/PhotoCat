@@ -35,7 +35,7 @@ function CategoryWindow(image, mode){
 					tableView.appendRow(Ti.UI.createTableViewRow({title:e.text}));
 					categories.push({id:catId, name:e.text});
 					//Open the gallery
-					Ti.App.nav.open(new GalleryWindow(catId, e.text));
+					Ti.App.nav.open(new GalleryWindow(catId, e.text, true));
 				}
 			});
 			dialog.show();
@@ -59,10 +59,10 @@ function CategoryWindow(image, mode){
 	tableView.addEventListener('click', function(e){
 		if(mode == "SAVE"){
 			SaveAndSwitchToViewMode(e.index);
-		}
-		
-		Ti.App.nav.open(new GalleryWindow(e.index, categories[e.index].name));
-	
+			Ti.App.nav.open(new GalleryWindow(e.index, categories[e.index].name, true));
+		}else if(mode == "VIEW"){
+			Ti.App.nav.open(new GalleryWindow(e.index, categories[e.index].name, false));
+		}	
 	});
 	
 	self.add(tableView);

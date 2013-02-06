@@ -76,6 +76,8 @@ var PictureGallery = {};
 		// ------- Default parameters -------
 		// Assign a default value to every unspecified value.
 		dictionary = ( typeof dictionary == 'undefined') ? {} : dictionary;
+		
+		dictionary.autoFireImage = ( typeof dictionary.autoFireImage == 'undefined') ? false : dictionary.autoFireImage;
 	
 		dictionary.images = ( typeof dictionary.images == 'undefined') ? [] : dictionary.images;
 	
@@ -696,7 +698,14 @@ var PictureGallery = {};
 		thumbGalleryWindow = Ti.UI.createWindow({
 			title : dictionary.title
 		});
-	
+		
+		thumbGalleryWindow.addEventListener('open', function(){
+			if(dictionary.autoFireImage){
+				thumbnailScrollView.children[thumbnailScrollView.children.length-1].fireEvent('click');
+				dictionary.autoFireImage = false;
+			}
+		});
+		
 		thumbGalleryWindow.orientationModes = [
 			Titanium.UI.LANDSCAPE_LEFT,
 			Titanium.UI.LANDSCAPE_RIGHT,

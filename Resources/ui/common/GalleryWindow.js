@@ -1,4 +1,4 @@
-function GalleryWindow(categoryId, categoryName) {
+function GalleryWindow(categoryId, categoryName, autoFire) {
 	var db = require('db');
 	
 	Titanium.include('thirdparty/titanium-picture-gallery/picturegallery.js');
@@ -13,11 +13,11 @@ function GalleryWindow(categoryId, categoryName) {
 	var pictureGallery = PictureGallery.createWindow({
  		images: galleryImages,
  		title: categoryName,
- 		windowGroup:Ti.App.nav
+ 		windowGroup:Ti.App.nav,
+ 		autoFireImage:autoFire
 	});
 	
 	Ti.App.nav.open(pictureGallery);
-	
 	return pictureGallery;
 }
 
