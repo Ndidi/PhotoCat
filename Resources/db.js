@@ -3,14 +3,17 @@ var DATABASE_NAME = 'PhotoCat';
 exports.createDb = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
 	db.execute('CREATE TABLE IF NOT EXISTS categories(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
-	db.execute('CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY, image BLOB, category INTEGER, FOREIGN KEY(category) REFERENCES categories(id))');
+	db.execute('CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY AUTOINCREMENT, image BLOB, category INTEGER, FOREIGN KEY(category) REFERENCES categories(id))');
 	db.execute('INSERT OR IGNORE INTO categories SELECT 0 AS id, "Home" AS name UNION SELECT 1, "Work" UNION SELECT 2, "Holiday"');
 	db.close();
 }
 
 exports.addCategory = function(_name){
 	var db = Ti.Database.open(DATABASE_NAME);
-	db.execute('INSERT INTO categories VALUES (NULL, ?)', _name);
+	var rowCount = db.execute('SELECT * FROM categories where name == ? ', _name).getRowCount();
+	if(rowCount===0){
+		db.execute('INSERT INTO categories VALUES (NULL, ?)', _name);
+	}
 	db.close();
 }
 
