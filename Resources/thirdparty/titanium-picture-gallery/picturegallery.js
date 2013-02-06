@@ -368,6 +368,13 @@ var PictureGallery = {};
 						translucent : true
 					});
 	
+					var trashButton = Titanium.UI.createButton({systemButton:Titanium.UI.iPhone.SystemButton.TRASH});
+					trashButton.addEventListener('click', function(){
+						var db = require('db');
+						db.deleteImage(dictionary.images[i-1].id);
+					});
+					galleryWindow.rightNavButton = trashButton;
+
 					// Add a listener on orientation change...
 					Ti.Gesture.addEventListener('orientationchange', reComputeImagesSizeOnChange);
 	

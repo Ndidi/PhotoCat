@@ -7,7 +7,7 @@ function GalleryWindow(categoryId, categoryName, autoFire) {
 	var images = db.getImagesForCategory(categoryId);
 	
 	for(var i=0,j=images.length; i<j; i++){
-	  galleryImages[i] = {path:images[i].image} 
+	  galleryImages[i] = {path:images[i].image, id:images[i].id, category:images[i].category} 
 	};
 	
 	var pictureGallery = PictureGallery.createWindow({

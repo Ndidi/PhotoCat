@@ -47,6 +47,12 @@ exports.saveImageToCategory = function(_image, _category){
 	db.close();
 }
 
+exports.deleteImage = function(_imageId){
+	var db = Ti.Database.open(DATABASE_NAME);
+	db.execute('DELETE FROM photos WHERE id == ?', _imageId);
+	db.close();
+}
+
 exports.getImagesForCategory = function(_categoryId){
 	var db = Ti.Database.open(DATABASE_NAME);
 	var retData = [];
