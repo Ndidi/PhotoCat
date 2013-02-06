@@ -2,9 +2,12 @@ var DATABASE_NAME = 'PhotoCat';
 
 exports.createDb = function(){
 	var db = Ti.Database.open(DATABASE_NAME);
-	db.execute('CREATE TABLE IF NOT EXISTS categories(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
-	db.execute('CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY AUTOINCREMENT, image BLOB, category INTEGER, FOREIGN KEY(category) REFERENCES categories(id))');
-	db.execute('INSERT OR IGNORE INTO categories SELECT 0 AS id, "Home" AS name UNION SELECT 1, "Work" UNION SELECT 2, "Holiday"');
+	var existingTable = db.execute('SELECT name FROM sqlite_master WHERE type="table" AND name="categories"');
+	if(!existingTable.isValidRow()){
+		db.execute('CREATE TABLE IF NOT EXISTS categories(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)');
+		db.execute('CREATE TABLE IF NOT EXISTS photos(id INTEGER PRIMARY KEY AUTOINCREMENT, image BLOB, category INTEGER, FOREIGN KEY(category) REFERENCES categories(id))');
+		db.execute('INSERT OR IGNORE INTO categories SELECT 0 AS id, "Home" AS name UNION SELECT 1, "Work" UNION SELECT 2, "Holiday"');	
+	}
 	db.close();
 }
 
@@ -39,6 +42,13 @@ exports.getAllCategories = function(){
 	}	
 	db.close();
 	return retData;
+}
+
+exports.deleteCategory = function(_categoryId){
+	var db = Ti.Database.open(DATABASE_NAME);
+	db.execute('DELETE FROM photos WHERE category == ?', _categoryId);
+	db.execute('DELETE FROM categories WHERE id == ?', _categoryId);
+	db.close();
 }
 
 exports.saveImageToCategory = function(_image, _category){
