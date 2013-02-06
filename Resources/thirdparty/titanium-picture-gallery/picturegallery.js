@@ -372,6 +372,8 @@ var PictureGallery = {};
 					trashButton.addEventListener('click', function(){
 						var db = require('db');
 						db.deleteImage(dictionary.images[i-1].id);
+						//update dictionary images
+						
 					});
 					galleryWindow.rightNavButton = trashButton;
 
