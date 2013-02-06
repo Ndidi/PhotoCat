@@ -15,9 +15,9 @@ function CategoryWindow(image, mode){
 		tableView.addEventListener('click', function(e){
 			if(mode == "SAVE"){
 				SaveAndSwitchToViewMode(e.index);
-				Ti.App.nav.open(new GalleryWindow(e.index, categories[e.index].name, true));
+				Ti.App.nav.open(new GalleryWindow(e.rowData.id, e.rowData.name, true));
 			}else if(mode == "VIEW"){
-				Ti.App.nav.open(new GalleryWindow(e.index, categories[e.index].name, false));
+				Ti.App.nav.open(new GalleryWindow(e.rowData.id, e.rowData.name, false));
 			}	
 		});
 		
